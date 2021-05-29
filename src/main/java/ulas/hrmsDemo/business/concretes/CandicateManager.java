@@ -55,7 +55,7 @@ public class CandicateManager implements CandicateService {
             this.candicateDao.save(candicate);
             return new SuccessResult(this.emailService.sendEmail(candicate).getMessage());
         }catch (Exception e){
-            return new ErrorResult(e.getMessage()+"Hata aldıkkk");
+            return new ErrorResult(e.getMessage()+"Hata aldık");
         }
 
     }
