@@ -27,4 +27,7 @@ public class User {
     @Column(name = "password")
     private String password;
 
+    @JsonIgnore
+    @Column(name="is_verified")
+    private boolean isVerified;
 }

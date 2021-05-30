@@ -10,6 +10,6 @@ import ulas.hrmsDemo.entities.concretes.User;
 public class EmailManager implements EmailService {
     @Override
     public Result sendEmail(User user) {
-        return new SuccessResult("Mesaj Başarı ile Gönderildi"+" "+ user.getEmail());
+        return new SuccessResult("Aktivasyon Kodu Başarı ile Gönderildi"+" "+ user.getEmail());
     }
 }

@@ -4,10 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ulas.hrmsDemo.business.abstracts.CandicateService;
 import ulas.hrmsDemo.business.abstracts.EmailService;
+import ulas.hrmsDemo.business.abstracts.VerifyCodeService;
 import ulas.hrmsDemo.business.concretes.checkHelper.CandicateCheckHelper;
 import ulas.hrmsDemo.core.utilities.results.*;
 import ulas.hrmsDemo.core.utilities.results.adapters.UserCheckService;
 import ulas.hrmsDemo.dataAccess.abstracts.CandicateDao;
+import ulas.hrmsDemo.dataAccess.abstracts.EmployerDao;
+import ulas.hrmsDemo.dataAccess.abstracts.UserDao;
 import ulas.hrmsDemo.entities.concretes.Candicate;
 
 import java.time.LocalDate;
@@ -19,13 +22,23 @@ public class CandicateManager implements CandicateService {
     private CandicateDao candicateDao;
     private EmailService emailService;
     private UserCheckService userCheckService;
+    private VerifyCodeService verifyCodeService;
+    private UserDao userDao;
+
+
+
+
 
     @Autowired
-    public CandicateManager(CandicateDao candicateDao, EmailService emailService, UserCheckService userCheckService){
+    public CandicateManager(CandicateDao candicateDao, EmailService emailService, UserCheckService userCheckService,VerifyCodeService verifyCodeService, UserDao userDao){
 
         this.candicateDao = candicateDao;
         this.emailService = emailService;
         this.userCheckService = userCheckService;
+        this.verifyCodeService = verifyCodeService;
+        this.userDao = userDao;
+
+
     }
 
 
@@ -53,6 +66,7 @@ public class CandicateManager implements CandicateService {
         try
         {
             this.candicateDao.save(candicate);
+            this.verifyCodeService.createVerifyCode(candicate);
             return new SuccessResult(this.emailService.sendEmail(candicate).getMessage());
         }catch (Exception e){
             return new ErrorResult(e.getMessage()+"Hata aldıkk");

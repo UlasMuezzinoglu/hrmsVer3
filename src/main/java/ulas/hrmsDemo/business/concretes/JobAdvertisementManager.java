@@ -76,7 +76,7 @@ public class JobAdvertisementManager implements JobAdvertisementService {
     }
 
     @Override
-    public DataResult<List<JobAdvertisement>> findAllByStatusTrueOrderByPublishDateDesc() {
+    public DataResult<List<JobAdvertisement>>  findAllByStatusTrueOrderByPublishDateDesc() {
         return new SuccessDataResult<List<JobAdvertisement>>(this.jobAdvertisementDao.findAllByStatusTrueOrderByPublishDateDesc(),"Verilerden Aktif Olanlar Tarihe Göre Listelendi");
 
     }
