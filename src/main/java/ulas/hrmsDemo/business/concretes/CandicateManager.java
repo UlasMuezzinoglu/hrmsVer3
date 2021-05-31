@@ -5,15 +5,15 @@ import org.springframework.stereotype.Service;
 import ulas.hrmsDemo.business.abstracts.CandicateService;
 import ulas.hrmsDemo.business.abstracts.EmailService;
 import ulas.hrmsDemo.business.abstracts.VerifyCodeService;
-import ulas.hrmsDemo.business.concretes.checkHelper.CandicateCheckHelper;
+import ulas.hrmsDemo.business.checkHelper.concretes.CandicateCheckHelper;
 import ulas.hrmsDemo.core.utilities.results.*;
 import ulas.hrmsDemo.core.utilities.results.adapters.UserCheckService;
 import ulas.hrmsDemo.dataAccess.abstracts.CandicateDao;
-import ulas.hrmsDemo.dataAccess.abstracts.EmployerDao;
 import ulas.hrmsDemo.dataAccess.abstracts.UserDao;
 import ulas.hrmsDemo.entities.concretes.Candicate;
 
-import java.time.LocalDate;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 import java.util.List;
 
 @Service
@@ -48,29 +48,42 @@ public class CandicateManager implements CandicateService {
     }
 
 
-    @Override
-    public DataResult<Boolean> isPersonReal(String nationalityId, String firstName, String lastName, int birtOfYear) {
-        return new DataResult<>(this.userCheckService.isPersonReal(nationalityId,firstName,lastName,birtOfYear),true);
-    }
+
 
     @Override
     public Result register(Candicate candicate) {
 
-        /*boolean isChecked = !this.isPersonReal(candicate.getIdentityNumber(),candicate.getFirstName(),candicate.getLastName(),candicate.getBirthYear()).getData();
-        boolean checkFields = !CandicateCheckHelper.allFieldsAreReq(candicate);
+        boolean isChecked = this.userCheckService.isPersonReal(candicate.getIdentityNumber(),candicate.getFirstName(),candicate.getLastName(),candicate.getBirthYear());
+        //boolean checkFields = CandicateCheckHelper.allFieldsAreReq(candicate);
 
-        if (isChecked || checkFields){
-            return new ErrorResult("Hata !");
-        }*/
+        String errorMsg = "";
+        boolean flag = false;
+        if (!isChecked){
 
-        try
-        {
-            this.candicateDao.save(candicate);
-            this.verifyCodeService.createVerifyCode(candicate);
-            return new SuccessResult(this.emailService.sendEmail(candicate).getMessage());
-        }catch (Exception e){
-            return new ErrorResult(e.getMessage()+"Hata aldıkk");
+          return new ErrorResult("Mernis Doğrulama Hatası Bilgilerinizi Doğru Girin !");
+
         }
+        if (this.userDao.existsByEmail(candicate.getEmail())){
+
+            errorMsg = "Bu Mail Adresi ile İşleşen Zaten Bir Kayıt Var. | ";
+            flag = true;
+
+        }
+        if (this.candicateDao.existsByIdentityNumber(candicate.getIdentityNumber())){
+
+            errorMsg += "Bu T.C Kimlik Numarası ile İşleşen Zaten Bir Kayıt Var. |";
+            flag = true;
+        }
+        if (!candicate.getPassword().equals(candicate.getPasswordAgain())) {
+            errorMsg += "Girdiğiniz Şifreler Birbirleri İle Uyuşmuyor.";
+            flag = true;
+        }
+        if (flag){
+            return new ErrorResult(errorMsg);
+        }
+        this.candicateDao.save(candicate);
+        this.verifyCodeService.createVerifyCode(candicate);
+        return new SuccessResult(this.emailService.sendEmail(candicate).getMessage());
 
     }
 

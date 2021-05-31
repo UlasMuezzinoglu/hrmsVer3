@@ -8,6 +8,7 @@ import ulas.hrmsDemo.core.utilities.results.Result;
 import ulas.hrmsDemo.entities.concretes.Employer;
 import ulas.hrmsDemo.entities.concretes.JobAdvertisement;
 import ulas.hrmsDemo.entities.concretes.JobTitle;
+import ulas.hrmsDemo.entities.dtos.JobAdvertisementDto;
 
 import javax.xml.crypto.Data;
 import java.util.List;
@@ -57,5 +58,10 @@ public class JobAdvertisementController {
     @GetMapping("getDataBySortedDesc")
     public DataResult<List<JobAdvertisement>> getDataBySortedDesc(){
         return this.jobAdvertisementService.findAllByStatusTrueOrderByPublishDateDesc();
+    }
+
+    @GetMapping("getJobAdvertisementWithEmpDetails")
+    public DataResult<List<JobAdvertisementDto>> getDataWithDetails(){
+        return this.jobAdvertisementService.getJobAdvertisementWithEmpDetails();
     }
 }

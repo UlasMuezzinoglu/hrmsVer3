@@ -13,5 +13,5 @@ public interface CandicateService {
     DataResult<List<Candicate>> getAll();
     Result register(Candicate candicate);
 
-    DataResult<Boolean> isPersonReal(String nationalityId, String firstName, String lastName, int birtOfYear);
+    //DataResult<Boolean> isPersonReal(String nationalityId, String firstName, String lastName, int birtOfYear);
 }

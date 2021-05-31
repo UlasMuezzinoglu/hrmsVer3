@@ -5,13 +5,12 @@ import org.springframework.stereotype.Service;
 import ulas.hrmsDemo.business.abstracts.EmailService;
 import ulas.hrmsDemo.business.abstracts.EmployerService;
 import ulas.hrmsDemo.business.abstracts.VerifyCodeService;
-import ulas.hrmsDemo.business.concretes.checkHelper.EmployeeCheckHelper;
-import ulas.hrmsDemo.business.concretes.checkHelper.EmployerCheckHelper;
+import ulas.hrmsDemo.business.checkHelper.concretes.EmployeeCheckHelper;
+import ulas.hrmsDemo.business.checkHelper.concretes.EmployerCheckHelper;
 import ulas.hrmsDemo.core.utilities.results.*;
 import ulas.hrmsDemo.dataAccess.abstracts.EmployerDao;
 import ulas.hrmsDemo.dataAccess.abstracts.UserDao;
 import ulas.hrmsDemo.entities.concretes.Employer;
-import ulas.hrmsDemo.entities.concretes.User;
 
 import java.util.List;
 

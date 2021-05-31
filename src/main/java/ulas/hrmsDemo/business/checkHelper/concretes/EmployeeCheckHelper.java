@@ -1,4 +1,4 @@
-package ulas.hrmsDemo.business.concretes.checkHelper;
+package ulas.hrmsDemo.business.checkHelper.concretes;
 
 import ulas.hrmsDemo.entities.concretes.Employer;
 

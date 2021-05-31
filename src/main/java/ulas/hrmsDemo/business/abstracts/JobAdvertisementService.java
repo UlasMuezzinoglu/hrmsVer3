@@ -6,6 +6,7 @@ import ulas.hrmsDemo.core.utilities.results.SuccessDataResult;
 import ulas.hrmsDemo.entities.concretes.Candicate;
 import ulas.hrmsDemo.entities.concretes.Employer;
 import ulas.hrmsDemo.entities.concretes.JobAdvertisement;
+import ulas.hrmsDemo.entities.dtos.JobAdvertisementDto;
 
 import java.util.List;
 
@@ -26,7 +27,7 @@ public interface JobAdvertisementService {
     DataResult<List<JobAdvertisement>> findAllByStatusTrueOrderByPublishDateDesc();
 
 
-
+    DataResult<List<JobAdvertisementDto>> getJobAdvertisementWithEmpDetails();
 
 
 }

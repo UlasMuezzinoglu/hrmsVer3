@@ -6,6 +6,7 @@ import ulas.hrmsDemo.business.abstracts.JobAdvertisementService;
 import ulas.hrmsDemo.core.utilities.results.*;
 import ulas.hrmsDemo.dataAccess.abstracts.JobAdvertisementDao;
 import ulas.hrmsDemo.entities.concretes.JobAdvertisement;
+import ulas.hrmsDemo.entities.dtos.JobAdvertisementDto;
 
 import java.util.List;
 
@@ -79,6 +80,11 @@ public class JobAdvertisementManager implements JobAdvertisementService {
     public DataResult<List<JobAdvertisement>>  findAllByStatusTrueOrderByPublishDateDesc() {
         return new SuccessDataResult<List<JobAdvertisement>>(this.jobAdvertisementDao.findAllByStatusTrueOrderByPublishDateDesc(),"Verilerden Aktif Olanlar Tarihe Göre Listelendi");
 
+    }
+
+    @Override
+    public DataResult<List<JobAdvertisementDto>> getJobAdvertisementWithEmpDetails() {
+        return new SuccessDataResult<List<JobAdvertisementDto>>(this.jobAdvertisementDao.getJobAdvertisementWithEmpDetails());
     }
 
 

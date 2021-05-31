@@ -21,6 +21,8 @@ import java.time.LocalDate;
 
 
 public class Candicate extends User{
+
+
     @Column(name = "first_name")
     private String firstName;
 

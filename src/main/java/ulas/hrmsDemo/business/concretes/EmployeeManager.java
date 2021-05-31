@@ -3,7 +3,7 @@ package ulas.hrmsDemo.business.concretes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ulas.hrmsDemo.business.abstracts.EmployeeService;
-import ulas.hrmsDemo.business.concretes.checkHelper.EmployeeCheckHelper;
+import ulas.hrmsDemo.business.checkHelper.concretes.EmployeeCheckHelper;
 import ulas.hrmsDemo.core.utilities.results.DataResult;
 import ulas.hrmsDemo.core.utilities.results.SuccessDataResult;
 import ulas.hrmsDemo.dataAccess.abstracts.EmployeeDao;

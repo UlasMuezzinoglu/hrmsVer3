@@ -1,6 +1,8 @@
-package ulas.hrmsDemo.business.concretes.checkHelper;
+package ulas.hrmsDemo.business.checkHelper.concretes;
 
+import org.springframework.stereotype.Service;
 import ulas.hrmsDemo.entities.concretes.Candicate;
+
 
 public class CandicateCheckHelper {
 
@@ -16,4 +18,5 @@ public class CandicateCheckHelper {
         }
         return true;
     }
+
 }
