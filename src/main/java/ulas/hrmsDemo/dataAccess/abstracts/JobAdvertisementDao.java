@@ -19,9 +19,24 @@ public interface JobAdvertisementDao extends JpaRepository<JobAdvertisement, Int
 
 
     @Query("Select new ulas.hrmsDemo.entities.dtos.JobAdvertisementDto"
-            + "(p.id,  j.jobTitle , p.jobOfNumberPosition, p.publishDate, p.endOfJobDate) "
-            + "From JobTitle j Inner Join j.jobAdvertisements p")
+            + "( j.jobTitle , p.jobOfNumberPosition, p.publishDate, p.endOfJobDate, e.companyName) "
+            + "From JobTitle j Inner Join j.jobAdvertisements p Inner Join p.employer e Where p.status = 'true'")
     List<JobAdvertisementDto> getJobAdvertisementWithEmpDetails();
 
+
+    // Hibernate model mapper ! important
+
+    @Query("Select new ulas.hrmsDemo.entities.dtos.JobAdvertisementDto"
+            + "( j.jobTitle , p.jobOfNumberPosition, p.publishDate, p.endOfJobDate, e.companyName) "
+            + "From JobTitle j Inner Join j.jobAdvertisements p Inner Join p.employer e Where p.status = 'true' Order By p.publishDate ASC")
+    List<JobAdvertisementDto> getJobAdvertisementWithEmpDetailsSıralamaAsc();
+
+    @Query("SELECT new ulas.hrmsDemo.entities.dtos.JobAdvertisementDto" +
+            "(jb.jobTitle , ja.jobOfNumberPosition, ja.publishDate, ja.endOfJobDate, e.companyName)" +
+            "FROM JobAdvertisement ja " +
+            "INNER JOIN ja.jobTitle jb " +
+            "INNER JOIN ja.employer e " +
+            "WHERE e.id=:employerId And ja.status = 'true'")
+    List<JobAdvertisementDto> getJobAdvertisementWithEmpDetailsByEmpId(int employerId);
 
 }

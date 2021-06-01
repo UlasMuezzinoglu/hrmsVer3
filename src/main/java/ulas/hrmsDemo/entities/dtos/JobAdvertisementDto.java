@@ -13,9 +13,10 @@ import java.util.Date;
 @NoArgsConstructor
 public class JobAdvertisementDto {
 
-    private int id;
+    //private int id;
     private String jobTitle;
     private String jobOfNumberPosition;
     private Date publishDate;
     private LocalDate endOfJobDate;
+    private String companyName;
 }

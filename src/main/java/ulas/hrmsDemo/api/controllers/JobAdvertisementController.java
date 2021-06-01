@@ -5,12 +5,9 @@ import org.springframework.web.bind.annotation.*;
 import ulas.hrmsDemo.business.abstracts.JobAdvertisementService;
 import ulas.hrmsDemo.core.utilities.results.DataResult;
 import ulas.hrmsDemo.core.utilities.results.Result;
-import ulas.hrmsDemo.entities.concretes.Employer;
 import ulas.hrmsDemo.entities.concretes.JobAdvertisement;
-import ulas.hrmsDemo.entities.concretes.JobTitle;
 import ulas.hrmsDemo.entities.dtos.JobAdvertisementDto;
 
-import javax.xml.crypto.Data;
 import java.util.List;
 
 @RestController
@@ -63,5 +60,15 @@ public class JobAdvertisementController {
     @GetMapping("getJobAdvertisementWithEmpDetails")
     public DataResult<List<JobAdvertisementDto>> getDataWithDetails(){
         return this.jobAdvertisementService.getJobAdvertisementWithEmpDetails();
+    }
+
+    @GetMapping("orderByDate")
+    public DataResult<List<JobAdvertisementDto>> getDataOrderByDate(){
+        return this.jobAdvertisementService.getJobAdvertisementWithEmpDetailsSıralamaAsc();
+    }
+
+    @GetMapping("getirTest")
+    public DataResult<List<JobAdvertisementDto>> getDataWithEmpId(@RequestParam int employerId){
+        return this.jobAdvertisementService.getJobAdvertisementWithEmpDetailsByEmpId(employerId);
     }
 }

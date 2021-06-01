@@ -87,5 +87,15 @@ public class JobAdvertisementManager implements JobAdvertisementService {
         return new SuccessDataResult<List<JobAdvertisementDto>>(this.jobAdvertisementDao.getJobAdvertisementWithEmpDetails());
     }
 
+    @Override
+    public DataResult<List<JobAdvertisementDto>> getJobAdvertisementWithEmpDetailsSıralamaAsc() {
+        return new SuccessDataResult<List<JobAdvertisementDto>>(this.jobAdvertisementDao.getJobAdvertisementWithEmpDetailsSıralamaAsc());
+    }
+
+    @Override
+    public DataResult<List<JobAdvertisementDto>> getJobAdvertisementWithEmpDetailsByEmpId(int employerId) {
+        return  new SuccessDataResult<List<JobAdvertisementDto>>(this.jobAdvertisementDao.getJobAdvertisementWithEmpDetailsByEmpId(employerId));
+    }
+
 
 }

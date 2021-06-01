@@ -8,6 +8,7 @@ import ulas.hrmsDemo.entities.concretes.Employer;
 import ulas.hrmsDemo.entities.concretes.JobAdvertisement;
 import ulas.hrmsDemo.entities.dtos.JobAdvertisementDto;
 
+import javax.xml.crypto.Data;
 import java.util.List;
 
 public interface JobAdvertisementService {
@@ -29,5 +30,7 @@ public interface JobAdvertisementService {
 
     DataResult<List<JobAdvertisementDto>> getJobAdvertisementWithEmpDetails();
 
+    DataResult<List<JobAdvertisementDto>> getJobAdvertisementWithEmpDetailsSıralamaAsc();
 
+    DataResult<List<JobAdvertisementDto>> getJobAdvertisementWithEmpDetailsByEmpId(int employerId);
 }
